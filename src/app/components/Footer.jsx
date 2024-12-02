@@ -1,5 +1,5 @@
 export const Footer = (props) => {
     return(
-        <footer>GYM TRAINING - Copyright © 2024 by José Davim</footer>
+        <footer>{props.my_name} {props.project_name}</footer>
     ) 
     }

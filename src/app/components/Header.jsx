@@ -2,8 +2,8 @@
 export const Header = (props) => {
     return (
     <div>
-            <h1>GYM TRAINING</h1>
-            <h3>Desenvolvido por José Davim</h3>    
+            <h1>{props.my_name}</h1>
+            <h3>{props.project_name}</h3>    
     </div>
 )
 }
