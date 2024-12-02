@@ -1,6 +1,8 @@
+
 export const Content = (props) => {
+    return (
     <div>
-    <Title>Top-3 Treinos favoritos</Title>
+    <title>Top-3 Treinos favoritos</title>
 
     <div className="training">
         {/* Treino  1 */}
@@ -31,4 +33,5 @@ export const Content = (props) => {
         </div>
     </div>
     </div>
+    )
     }
