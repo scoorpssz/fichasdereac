@@ -34,7 +34,7 @@ export const Content = (props) => {
                         <div className="train-box" key={props.id}>
                             <img src={props.img} alt={props.name} />
                             <p>{props.name}</p>
-                            <TrainInfo description={props.description} />
+                            <p>{props.description}</p>
                         </div>
                     )
                 }
