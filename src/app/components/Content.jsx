@@ -1,37 +1,41 @@
+import { TrainInfo } from './TrainInfo';
 
 export const Content = (props) => {
+    const trainings = [
+        {
+            id: 1,
+            name: "Bench Press",
+            img: "https://s3assets.skimble.com/assets/2289486/image_iphone.jpg",
+            description: "Treino de força para o peitoral.",
+        },
+        {
+            id: 2,
+            name: "Straight Back Seated Row",
+            img: "https://lyfta.app/thumbnails/02391201.jpg",
+            description: "Exercício para fortalecer as costas.",
+        },
+        {
+            id: 3,
+            name: "Lever Chest Press",
+            img: "https://www.lyfta.app/_next/image?url=%2Fthumbnails%2F05771201.jpg&w=3840&q=20",
+            description: "Treino com foco em peito e tríceps.",
+        },
+    ];
+
     return (
-    <div>
-    <title>Top-3 Treinos favoritos</title>
+        <div>
+            <title>Top-3 Treinos Favoritos</title>
+            <h1>Top-3 Treinos Favoritos</h1>
 
-    <div className="training">
-        {/* Treino  1 */}
-        <div className="train-box">
-        <img 
-            src="https://s3assets.skimble.com/assets/2289486/image_iphone.jpg"
-            alt="Bench Press"
-            />  
-            <p>Bench Press</p>  
+            <div className="training">
+                {trainings.map((train) => (
+                    <div className="train-box" key={train.id}>
+                        <img src={train.img} alt={train.name} />
+                        <p>{train.name}</p>
+                        <TrainInfo description={train.description} />
+                    </div>
+                ))}
+            </div>
         </div>
-
-        {/* Treino  2 */}
-        <div className="train-box">
-        <img 
-            src="https://lyfta.app/thumbnails/02391201.jpg"
-            alt="Straight Back Seated Row"
-            /> 
-            <p>Straight Back Seated Row</p>   
-        </div>
-
-        {/* Treino  3 */}
-        <div className="train-box">
-        <img 
-            src="https://www.lyfta.app/_next/image?url=%2Fthumbnails%2F05771201.jpg&w=3840&q=20"
-            alt="Lever Chest Press"
-            />
-            <p>Lever Chest Press</p>    
-        </div>
-    </div>
-    </div>
-    )
-    }
+    );
+};
