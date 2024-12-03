@@ -28,11 +28,11 @@ export const Content = (props) => {
             <h1>Top-3 Treinos Favoritos</h1>
 
             <div className="training">
-                {trainings.map((train) => (
-                    <div className="train-box" key={train.id}>
-                        <img src={train.img} alt={train.name} />
-                        <p>{train.name}</p>
-                        <TrainInfo description={train.description} />
+                {trainings.map((props) => (
+                    <div className="train-box" key={props.id}>
+                        <img src={props.img} alt={props.name} />
+                        <p>{props.name}</p>
+                        <TrainInfo description={props.description} />
                     </div>
                 ))}
             </div>
