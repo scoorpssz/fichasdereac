@@ -3,7 +3,7 @@ import { TrainInfo } from './TrainInfo';
 import trainList  from '../shared/train';
 import React, {useState} from "react";
 export const Content = (props) => {
-    const [ListOfTrain, setTrainList] = useState(trainList);
+    const [ListOfTrain] = useState(trainList);
 
     const [favoriteTrains, setFavoriteTrains] = useState([1, 3, 5]);
 
