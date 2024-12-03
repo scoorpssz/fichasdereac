@@ -9,8 +9,8 @@ import React, {useState} from "react";
 
 
 export default function Home() {
-  const [my_name, SetName] = useState<String>("José Cláudio")
-  const [project_name, SetProject] = useState<String>("Top3 treinos favoritos")
+  const [my_name] = useState<String>("José Cláudio")
+  const [project_name] = useState<String>("Top3 treinos favoritos")
 
   return (
     <div className={styles.page}>
