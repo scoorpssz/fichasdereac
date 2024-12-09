@@ -24,10 +24,12 @@ export default function RootLayout({
   children,
   header,
   footer,
+  dashboard,
 }: Readonly<{
   children: React.ReactNode;
   header: React.ReactNode;
   footer: React.ReactNode;
+  dashboard: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -35,6 +37,7 @@ export default function RootLayout({
         {children}
         {header}
         {footer}
+        {dashboard}
       </body>
     </html>
   );

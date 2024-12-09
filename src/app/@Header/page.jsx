@@ -1,3 +1,5 @@
+'use client';
+import Link from 'next/link';
 export default function Header(props) {
     return (
         <header>
@@ -7,8 +9,7 @@ export default function Header(props) {
     </div>
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/dashboard">Dashboard</a></li>
+                    <Link href="/">Home</Link> <Link href="/dashboard">Dashboard</Link>
                 </ul>
             </nav>
         </header>
