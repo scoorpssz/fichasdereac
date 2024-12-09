@@ -1,31 +1,43 @@
 "use client";
 import React, { useState } from "react";
-import trainList from "../train"; // Importa a lista de treinos
+import trainList from "../train";
 
 export const TrainList = () => {
-    const [trains, setTrains] = useState(trainList);  // Lista de treinos
-    const [favorites, setFavorites] = useState([1, 3, 5]);  // Lista de treinos favoritos
+    const [trains, setTrains] = useState(trainList);
+    const [favorites, setFavorites] = useState([1, 3, 5]);
 
-    // Função para excluir um treino
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentTrain, setCurrentTrain] = useState(null);
+
     const deleteTrain = (id) => {
-        setTrains(trains.filter(train => train.id !== id));
-        setFavorites(favorites.filter(favId => favId !== id));  // Remove dos favoritos, se necessário
+        setTrains(trains.filter((train) => train.id !== id));
+        setFavorites(favorites.filter((favId) => favId !== id));
     };
 
-    // Função para adicionar/remover treino dos favoritos
     const toggleFavorite = (id) => {
-        setFavorites((prevFavorites) => {
-            if (prevFavorites.includes(id)) {
-                return prevFavorites.filter(favId => favId !== id);
-            } else {
-                return [...prevFavorites, id];
-            }
-        });
+        setFavorites((prevFavorites) =>
+            prevFavorites.includes(id)
+                ? prevFavorites.filter((favId) => favId !== id)
+                : [...prevFavorites, id]
+        );
     };
 
-    // Função para verificar se o treino está marcado como favorito
-    const isFavorite = (id) => {
-        return favorites.includes(id);
+    const isFavorite = (id) => favorites.includes(id);
+
+    const editTrain = (id, updatedTrain) => {
+        setTrains((prevTrains) =>
+            prevTrains.map((train) => (train.id === id ? { ...train, ...updatedTrain } : train))
+        );
+    };
+
+    const openEditModal = (train) => {
+        setCurrentTrain(train);
+        setIsEditing(true);
+    };
+
+    const closeEditModal = () => {
+        setIsEditing(false);
+        setCurrentTrain(null);
     };
 
     return (
@@ -49,21 +61,65 @@ export const TrainList = () => {
                             <td>{train.name}</td>
                             <td>{train.description}</td>
                             <td>
-                                {/* Botão Excluir */}
+                                <button onClick={() => openCreateModal(train)}>Criar</button>
+                                <button onClick={() => openEditModal(train)}>Editar</button>
                                 <button onClick={() => deleteTrain(train.id)}>Excluir</button>
-                                
-                                {/* Botão Favorito */}
                                 <button onClick={() => toggleFavorite(train.id)}>
                                     {isFavorite(train.id) ? "Remover Favorito" : "Adicionar Favorito"}
                                 </button>
-                                
-                                {/* Botão Editar */}
-                                <button onClick={() => alert(`Editar treino: ${train.name}`)}>Editar</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            
+            {isEditing && (
+                <div className="modal">
+                    <h2>Editar Treino</h2>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            editTrain(currentTrain.id, currentTrain);
+                            closeEditModal();
+                        }}
+                    >
+                        <label>
+                            Nome:
+                            <input
+                                type="text"
+                                value={currentTrain.name}
+                                onChange={(e) =>
+                                    setCurrentTrain({ ...currentTrain, name: e.target.value })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Descrição:
+                            <input
+                                type="text"
+                                value={currentTrain.description}
+                                onChange={(e) =>
+                                    setCurrentTrain({ ...currentTrain, description: e.target.value })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Imagem (URL):
+                            <input
+                                type="text"
+                                value={currentTrain.img}
+                                onChange={(e) =>
+                                    setCurrentTrain({ ...currentTrain, img: e.target.value })
+                                }
+                            />
+                        </label>
+                        <button type="submit">Salvar</button>
+                        <button type="button" onClick={closeEditModal}>
+                            Cancelar
+                        </button>
+                    </form>
+                </div>
+            )}
         </div>
     );
 };
