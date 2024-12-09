@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Header } from "../components/Header";  
 import { Footer } from "../components/Footer";  
 import { TrainList } from "./components/trainlist";
-import './globals.css';  
+import './dashboard.css';  
 
 export default function Dashboard() {
   const [my_name] = useState<String>("José Cláudio");
