@@ -5,5 +5,6 @@ export const Header = (props) => {
             <h1>{props.my_name}</h1>
             <h2>{props.project_name}</h2>    
     </div>
+    
 )
 }

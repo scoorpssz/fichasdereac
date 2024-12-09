@@ -1,3 +1,4 @@
+import Layout from '../layout'
 export const Footer = (props) => {
     return(
          <footer>
