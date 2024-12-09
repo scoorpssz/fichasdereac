@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TrainContext } from "../context/TrainContext";
 import { Link } from "react-router-dom";
 
-const TrainList = () => {
+const trainlist = () => {
     
     const { trains, deleteTrain, log } = useContext(TrainContext);
 
@@ -59,4 +59,4 @@ const TrainList = () => {
     );
 };
 
-export default trainlist;
+export default trainlist;s
