@@ -1,6 +1,6 @@
 "use client";
 import { TrainInfo } from './TrainInfo';
-import trainList from '../shared/train';
+import trainList from '../shared/trainList';
 import React, { useState, useEffect } from "react";
 import Loader from "./Loader"; 
 

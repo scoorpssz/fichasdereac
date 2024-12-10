@@ -1,33 +1,30 @@
 import React, { createContext, useState } from "react";
+import { TrainList }from "../shared/trainList";
 
 export const TrainContext = createContext();
 
 const TrainProvider = ({ children }) => {
-    const [trains, setTrains] = useState([]); 
-    const [log, setLog] = useState([]); 
+    const [trains, setTrains] = useState(TrainList);
+    const [log, setLog] = useState([]);
 
     const addTrain = (train) => {
         const newTrain = { id: Date.now(), ...train };
         setTrains((prev) => [...prev, newTrain]);
-        addLog(`Treino "${newTrain.name}" criado.`);
+        addLog(`Trem "${newTrain.name}" criado.`);
     };
 
-    
     const editTrain = (id, updatedTrain) => {
         setTrains((prev) =>
             prev.map((train) => (train.id === id ? { ...train, ...updatedTrain } : train))
         );
-        addLog(`Treino "${updatedTrain.name}" atualizado.`);
+        addLog(`Trem "${updatedTrain.name}" atualizado.`);
     };
 
-   
     const deleteTrain = (id) => {
-        const deletedTrain = trains.find((train) => train.id === id);
         setTrains((prev) => prev.filter((train) => train.id !== id));
-        addLog(`Treino "${deletedTrain.name}" apagado.`);
+        addLog(`Trem com ID: ${id} apagado.`);
     };
 
-    
     const addLog = (message) => {
         setLog((prev) => [...prev, { message, timestamp: new Date().toISOString() }]);
     };
@@ -39,7 +36,7 @@ const TrainProvider = ({ children }) => {
                 addTrain,
                 editTrain,
                 deleteTrain,
-                log, 
+                log,
             }}
         >
             {children}

@@ -7,7 +7,7 @@ export const Header = (props) => {
             <h2>{props.project_name}</h2>    
             <nav>
                 <ul>
-                <Link href="/" passHref> <button>Escolher Treino Aleatório</button> </Link>  <Link href="./dashboard" passHref><button>Dashboard</button></Link>      
+                <Link href="/" passHref> <button>Home</button> </Link>  <Link href="./dashboard" passHref><button>Dashboard</button></Link>      
                 </ul>
             </nav>
     </div>
