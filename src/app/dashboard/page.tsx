@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import trainList from "./TrainList.js";
 
 interface Train {
@@ -13,7 +13,7 @@ interface Train {
 }
 
 export default function Dashboard() {
-  const [trains, setTrains] = useState<Train[]>(trainList);
+  const [trains, setTrains] = useState<Train[]>([]);
   const [favorites, setFavorites] = useState<number[]>([1, 3, 5]);
   const [isEditing, setIsEditing] = useState(false);
   const [editTrain, setEditTrain] = useState<Train | null>(null);
@@ -23,6 +23,22 @@ export default function Dashboard() {
     img: "",
     description: "",
   });
+
+  useEffect(() => {
+    const storedTrains = localStorage.getItem('trains');
+    if (storedTrains) {
+      setTrains(JSON.parse(storedTrains));
+    } else {
+      setTrains(trainList);
+      localStorage.setItem('trains', JSON.stringify(trainList));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (trains.length > 0) {
+      localStorage.setItem('trains', JSON.stringify(trains));
+    }
+  }, [trains]);
 
   const deleteTrain = (id: number) => {
     setTrains(trains.filter(train => train.id !== id));
@@ -95,7 +111,7 @@ export default function Dashboard() {
         <Header my_name={my_name} project_name={project_name}></Header>
       </header>
       <div className={styles["dashboard-content"]}>
-        <h2 className={styles.title}>Lista de Treinos</h2>
+        <h2>Lista de Treinos</h2>
 
         <h3>Criar Novo Treino</h3>
         <div>
@@ -172,7 +188,13 @@ export default function Dashboard() {
               {trains.map((train) => (
                 <tr key={train.id}>
                   <td>{train.id}</td>
-                  <td><img src={train.img} alt={train.name} width="50" /></td>
+                  <td>
+                    {train.img ? (
+                      <img src={train.img} alt={train.name} width="50" />
+                    ) : (
+                      <span>Sem imagem</span>
+                    )}
+                  </td>
                   <td>{train.name}</td>
                   <td>{train.description}</td>
                   <td>
